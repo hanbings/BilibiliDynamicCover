@@ -5,6 +5,22 @@
  * Bilibili 不寂寒冰
  */
 var base64;
+var bvid;
+var sessdata;
+var bilijct;
+var server = 'http://127.0.0.1:5000'
+
+function saveBvid(obj) {
+    bvid = obj.value;
+}
+
+function saveSessdata(obj) {
+    sessdata = obj.value;
+}
+
+function saveBilibiliJct(obj) {
+    bilijct = obj.value;
+}
 
 function imgChange(obj) {
     var image = obj.files[0]; //获取文件域中选中的图片
@@ -18,6 +34,29 @@ function imgChange(obj) {
 }
 
 function upload() {
-    alert(base64);
-    alert('或许发送成功了 快去看看吧！ ^ _ ^');
+    // 上传图片到bilibili图库
+    imageUploader();
+    // 上传动态封面到视频
+    coverUploader();
+    // 再提示下 XD
+    alert('请在此页面停留至已投稿 或许发送成功了 快去看看吧！ ^ _ ^');
+}
+
+function imageUploader() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', server + '/iu');
+
+    /*if (xhr.readyState == 4 && xhr.status == 200) {
+        alert(xhr.responseText);
+    }*/
+
+    var data = new FormData();
+    data.append('csrf', bilijct);
+    data.append('sessdata', sessdata);
+    data.append('cover', base64);
+    xhr.send(data)
+}
+
+function coverUploader() {
+
 }
