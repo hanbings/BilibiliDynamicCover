@@ -38,9 +38,12 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="./js/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="./js/materialize.min.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
     <div class="container-login">
         <div class="center">
-            <h3>快捷封面上传</h3>
+            <h3>动态封面上传</h3>
+            <h6>Pages Power By Materialize</h6>
+            <h6>Author Bilibili 不寂寒冰</h6>
         </div>
         <div class="row">
             <div class="input-field col s12">
@@ -56,8 +59,19 @@
                 <label for="jct">BILIJCT</label>
             </div>
         </div>
+        <form action="#">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>选择封面</span>
+                <input type="file" id="image">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </form>
         <div class="input-field col s12">
-            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="setSomething();login();">Login
+            <button class="btn waves-effect waves-light" type="submit" name="action" onclick="upload();">Upload
             <i class="material-icons right">send</i>
         </button>
         </div>
