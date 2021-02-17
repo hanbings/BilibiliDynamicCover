@@ -24,11 +24,11 @@ function imgChange(obj) {
 // 上传信息
 function upload() {
     //创建xhr对象
-    (xhr = new XMLHttpRequest()).open('POST', server, true);   //初始化url及方式
+    (xhr = new XMLHttpRequest()).open('POST', server, true); //初始化url及方式
     //创建并添加form表单
-    (form = new FormData).append('bvid',bvid);                 //稿件bvid
-    form.append('cookies',cookies);                            //所有Cookies
-    form.append('cover',cover);                                //封面文件
+    (form = new FormData).append('bvid', bvid); //稿件bvid
+    form.append('cookies', cookies); //所有Cookies
+    form.append('cover', cover); //封面文件
     //发送form表单
     xhr.send(form);
     /**
@@ -40,5 +40,5 @@ function upload() {
             alert(json);
         }
     };
-    alert('bwt 我不会保留你们任何的数据 以及......能不能过审看运气咯～')
+    alert('btw 我不会保留你们任何的数据 以及......能不能过审看运气咯～ 还有还有 如果发送成功 那么应该能在下一个窗口看到相关信息 如果没有任何提醒 您可以再次点击发送按钮')
 }

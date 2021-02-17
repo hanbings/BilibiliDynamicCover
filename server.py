@@ -13,12 +13,13 @@ def main():
  
 @app.route('/upload', methods=['POST'])
 def upload():
-    '利用相簿图床上传api上传封面'
+    
     bvid=request.form.get('bvid')
     cookies=request.form.get('cookies')
     cover=request.files.get('cover')
-
-    url = "https://api.vc.bilibili.com/api/v1/drawImage/upload"
+    
+    # 利用相簿图床上传api上传封面
+    url = "http://api.vc.bilibili.com/api/v1/drawImage/upload"
     headers={
         'cookie':cookies,
         'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36'
@@ -30,9 +31,22 @@ def upload():
         'build':(None,0),
         'mobi_app':(None,'web')
     }
-    resp=requests.post(url,headers=headers,files=payload).json()
-    print(resp)
-    response=resp
+    CoverUploaderResp=requests.post(url,headers=headers,files=payload).json()
+
+    # 获取视频信息
+    url = "http://api.bilibili.com/x/web-interface/view"
+    headers={
+        'cookie':cookies,
+        'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36'
+    }
+    querystring = {"bvid":"BV1i64y1M7mR"}
+    VideoGetterResp=requests.get(url,headers=headers,params=querystring).json()
+    
+    # 视频模板 上传封面
+
+
+    # 聚合信息 返回前端
+    response=VideoGetterResp
     return response
 
 if __name__ == '__main__':
