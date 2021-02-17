@@ -6,18 +6,23 @@
  */
 var cover;
 var bvid;
-var cookies;
-var server = '/upload'
+var sessdata;
+var bilijct;
+var server = '/upload';
 
 function saveBvid(obj) {
     bvid = obj.value;
 }
 
-function saveCookies(obj) {
-    cookies = obj.value;
+function saveSessdata(obj) {
+    sessdata = obj.value;
 }
 
-function imgChange(obj) {
+function saveBilijct(obj) {
+    bilijct = obj.value;
+}
+
+function saveChange(obj) {
     cover = obj.files[0]; //获取文件域中选中的图片
 }
 
@@ -27,7 +32,8 @@ function upload() {
     (xhr = new XMLHttpRequest()).open('POST', server, true); //初始化url及方式
     //创建并添加form表单
     (form = new FormData).append('bvid', bvid); //稿件bvid
-    form.append('cookies', cookies); //所有Cookies
+    form.append('sessdata', sessdata);
+    form.append('bilijct', bilijct);
     form.append('cover', cover); //封面文件
     //发送form表单
     xhr.send(form);

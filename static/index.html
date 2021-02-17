@@ -51,15 +51,19 @@
                 <label for="bvid">BVID</label>
             </div>
             <div class="input-field col s12">
-                <input id="sessdata" type="text" class="validate" onchange="saveCookies(this);">
-                <label for="sessdata">Cookies</label>
+                <input id="sessdata" type="text" class="validate" onchange="saveSessdata(this);">
+                <label for="sessdata">Sessdata</label>
+            </div>
+            <div class="input-field col s12">
+                <input id="bilijct" type="text" class="validate" onchange="saveBilijct(this);">
+                <label for="bilijct">Bilijct</label>
             </div>
         </div>
         <form action="#">
             <div class="file-field input-field">
                 <div class="btn">
                     <span>选择封面</span>
-                    <input type="file" id="image" onchange="imgChange(this);">
+                    <input type="file" id="image" onchange="saveChange(this);">
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">
