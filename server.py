@@ -13,14 +13,19 @@ def main():
 def upload():
     url = "http://member.bilibili.com/x/vu/web/cover/up"
 
-    payload = "cover="+str(request.json.get('base64'))+"&csrf="+str(request.json.get('bilijct'))
-    headers = {
-    'Content-Type': "application/x-www-form-urlencoded",
-    'Cookie': "SESSDATA="+str(request.json.get('sessdata'))+"; bili_jct="+str(request.json.get('bilijct'))+";",
-    'cache-control': "no-cache"
+    payload ={
+        'cover':request.json.get('base64'),
+        'csrf':request.json.get('bilijct')
+    }
+    cookies={
+        'SESSDATA':request.json.get('sessdata'),
+        'bili_jct':request.json.get('bilijct')
+    }
+    hearders={
+        'Content-Type':''
     }
 
-    response = requests.request("POST", url, data=payload, headers=headers,verify=False)
+    response = requests.post(url, data=payload, cookies=cookies,verify=False)
     print(payload)
     print(response.text)
     return response.text
