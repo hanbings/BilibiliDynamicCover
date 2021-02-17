@@ -43,7 +43,6 @@ def upload():
         'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36'
     }
     VideoGetterResp=requests.get(url,headers=headers).json()
-    print(VideoGetterResp)
 
     # 视频模板 上传封面
     url = "http://member.bilibili.com/x/vu/web/edit?csrf=" + csrf
@@ -75,8 +74,7 @@ def upload():
     VideoUploaderResp=requests.post(url,headers=headers,data=json.dumps(payload)).json()
 
     # 聚合信息 返回前端
-    response=VideoUploaderResp
-    return response
+    return "如果你能看到这条消息 那么说明上传大概率已经成功了 下面是一些信息 确定没有看到XX失败且已经提交审核你可以不用理会\n\n" + str(CoverUploaderResp) + "\n" + str(VideoUploaderResp)
 
 if __name__ == '__main__':
     app.run()
