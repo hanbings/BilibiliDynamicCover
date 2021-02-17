@@ -13,31 +13,27 @@ def main():
  
 @app.route('/upload', methods=['POST'])
 def upload():
-    # 从私信API上传封面图片
-    url = "https://api.vc.bilibili.com/api/v1/drawImage/upload"
+    '利用相簿图床上传api上传封面'
+    bvid=request.form.get('bvid')
+    cookies=request.form.get('cookies')
+    cover=request.files.get('cover')
 
-    print(request.json.get('base64'))
-    '''
+    url = "https://api.vc.bilibili.com/api/v1/drawImage/upload"
+    headers={
+        'cookie':cookies,
+        'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36'
+    }
     payload ={
-        'file_up':BytesIO(base64.b64decode()),
-        'category':(None,'daily')
+        'file_up':cover,
+        'biz':(None,'draw'),
+        'category':(None,'daily'),
+        'build':(None,0),
+        'mobi_app':(None,'web')
     }
-    cookies={
-        'SESSDATA':request.json.get('sessdata'),
-        'bili_jct':request.json.get('bilijct')
-    }
-    '''
-    '''
-    hearders={
-        'Content-Type':''
-    }
-    '''
-    '''
-    response = requests.post(url,files=payload, cookies=cookies)
-    print(payload)
-    print(response.text)
-    return response.text
-    '''
+    resp=requests.post(url,headers=headers,files=payload).json()
+    print(resp)
+    response=resp
+    return response
 
 if __name__ == '__main__':
     app.run()
