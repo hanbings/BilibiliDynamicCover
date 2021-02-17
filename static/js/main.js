@@ -29,7 +29,7 @@ function imgChange(obj) {
     reader.onload = function(ev) { //文件读取成功完成时触发
         var dataURL = ev.target.result; //获得文件读取成功后的DataURL,也就是base64编码
         console.log(dataURL);
-        base64 = encodeURIComponent(dataURL);
+        base64 = dataURL;
     }
 }
 
