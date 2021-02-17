@@ -19,7 +19,7 @@ def upload():
     sessdata=request.form.get('sessdata')
     csrf=request.form.get('bilijct')
     cover=request.files.get('cover')
-    cookies=str(sessdata+";"+csrf+";")
+    cookies=str("SESSDATA="+sessdata+"; bili_jct"+csrf+";")
 
     # 利用相簿图床上传api上传封面
     url = "http://api.vc.bilibili.com/api/v1/drawImage/upload"
@@ -37,12 +37,13 @@ def upload():
     CoverUploaderResp=requests.post(url,headers=headers,files=payload).json()
 
     # 获取视频信息
-    url = "https://member.bilibili.com/x/web/archive/view?history=&bvid=" + bvid
+    url = "http://member.bilibili.com/x/web/archive/view?history=&bvid=" + bvid
     headers={
         'cookie':cookies,
         'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36'
     }
     VideoGetterResp=requests.get(url,headers=headers).json()
+    print(VideoGetterResp)
 
     # 视频模板 上传封面
     url = "http://member.bilibili.com/x/vu/web/edit?csrf=" + csrf
