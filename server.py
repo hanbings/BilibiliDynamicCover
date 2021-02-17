@@ -48,21 +48,17 @@ def upload():
     # 视频模板 上传封面
     url = "http://member.bilibili.com/x/vu/web/edit?csrf=" + csrf
     headers= {
+
         'cookie':cookies,
         'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36'
     }
     payload = {
         "copyright": VideoGetterResp['data']['archive']['copyright'],
-	    "videos": [{
-		    "filename": VideoGetterResp['data']['videos']['filename'],
-		    "title": VideoGetterResp['data']['videos']['title'],
-		    "desc": VideoGetterResp['data']['videos']['desc'],
-		    "cid": VideoGetterResp['data']['videos']['cid']
-	        }],
+	    "videos": VideoGetterResp['data']['videos'],
 	    "no_reprint": VideoGetterResp['data']['archive']['no_reprint'],
 	    "interactive": VideoGetterResp['data']['archive']['interactive'],
 	    "tid": VideoGetterResp['data']['archive']['tid'],
-	    "cover": CoverUploaderResp['data']['url'],
+	    "cover": CoverUploaderResp['data']['image_url'],
 	    "title": VideoGetterResp['data']['archive']['title'],
 	    "tag": VideoGetterResp['data']['archive']['tag'],
 	    "desc_format_id": VideoGetterResp['data']['archive']['desc_format_id'],
@@ -76,7 +72,7 @@ def upload():
 	    "is_360": VideoGetterResp['data']['archive']['is_360'],
 	    "aid": VideoGetterResp['data']['archive']['aid']
     }
-    VideoUploaderResp=requests.get(url,headers=headers,data=payload).json()
+    VideoUploaderResp=requests.post(url,headers=headers,data=json.dumps(payload)).json()
 
     # 聚合信息 返回前端
     response=VideoUploaderResp
