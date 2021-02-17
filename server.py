@@ -77,4 +77,4 @@ def upload():
     return "如果你能看到这条消息 那么说明上传大概率已经成功了 下面是一些信息 确定没有看到XX失败且已经提交审核你可以不用理会\n\n" + str(CoverUploaderResp) + "\n" + str(VideoUploaderResp)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=10086)
