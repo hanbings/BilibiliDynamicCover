@@ -29,10 +29,7 @@ def upload():
     }
     payload ={
         'file_up':cover,
-        'biz':(None,'draw'),
-        'category':(None,'daily'),
-        'build':(None,0),
-        'mobi_app':(None,'web')
+        'category':(None,'daily')
     }
     CoverUploaderResp=requests.post(url,headers=headers,files=payload).json()
 
